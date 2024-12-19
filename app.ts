@@ -31,8 +31,8 @@ app.get('/', (req:Request, res:Response)=>{
     res.render('entry')
 })
 
-const getPost = async(req:Request, res: Response)=>{
-    Post.find({contentType: 'dailies'})
+const getPost = async(req:Request, res: Response, page: string)=>{
+    Post.find({contentType: 'thoughts'})
     .sort({createdAt: -1})
     .then((result)=>{      
         res.render('dailies', {posts: result});        
@@ -40,7 +40,12 @@ const getPost = async(req:Request, res: Response)=>{
         console.log(error);
     })
 }
-app.get('/dailies', getPost)
+app.get('/dailies', (res, req)=>{
+    getPost(res, req, 'dailies');
+});
+app.get('/thoughts', (res, req)=>{
+    getPost(res, req, 'thoughts');
+});
 app.post('/submit', (req:Request, res:Response)=>{
     try {
         req.body.displayedDate = formatDate(new Date());
