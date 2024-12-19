@@ -31,15 +31,16 @@ app.get('/', (req:Request, res:Response)=>{
     res.render('entry')
 })
 
-app.get('/dailies', (req:Request, res: Response)=>{
-    Post.find({contentType: 'Thoughts'})
+const getPost = async(req:Request, res: Response)=>{
+    Post.find({contentType: 'dailies'})
+    .sort({createdAt: -1})
     .then((result)=>{      
         res.render('dailies', {posts: result});        
     }).catch((error)=>{
         console.log(error);
-        
     })
-})
+}
+app.get('/dailies', getPost)
 app.post('/submit', (req:Request, res:Response)=>{
     try {
         req.body.displayedDate = formatDate(new Date());
