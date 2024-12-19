@@ -1,0 +1,29 @@
+<!DOCTYPE html>
+<html lang="en">
+    <%- include('../partials/head')%>
+<body>
+    <%- include('../partials/header')%>
+
+    <main class="container">
+        
+        <div class="row mb-2">
+            <%posts.forEach((post)=>{%>
+          <div class="col-md-6">
+            <div class="row g-0 border rounded overflow-hidden flex-md-row mb-4 shadow-sm h-md-250 position-relative">
+                <div class="col p-4 d-flex flex-column position-static">
+                <strong class="d-inline-block mb-2 text-primary"><%=post.contentType%></strong>
+                <h3 class="mb-0">Featured post</h3>
+                <div class="mb-1 text-muted"><%=post.displayedDate.month%> <%=post.displayedDate.day%>, <%=post.displayedDate.time%></div>
+                <p class="card-text mb-auto"><%=post.content%></p>
+              </div>
+              <div class="col-auto d-none d-lg-block">
+                </div>
+            </div>
+        </div>
+        <%})%>
+    </div>
+</main>
+      
+    <script></script>
+</body>
+</html>
